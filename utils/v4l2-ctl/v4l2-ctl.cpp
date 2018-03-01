@@ -1145,8 +1145,8 @@ int main(int argc, char **argv)
 	tuner_set(fd);
 	io_set(fd);
 	stds_set(fd);
-	vidcap_set(fd);
 	vidout_set(fd);
+	vidcap_set(fd);
 	overlay_set(fd);
 	vbi_set(fd);
 	sdr_set(fd);
