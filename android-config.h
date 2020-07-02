@@ -117,4 +117,6 @@
 /* Define to `int' if <sys/types.h> does not define. */
 /* #undef mode_t */
 
+#define __force
+
 #endif
