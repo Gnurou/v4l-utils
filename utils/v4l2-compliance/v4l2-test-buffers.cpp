@@ -2358,7 +2358,7 @@ public:
 		 * artillery and cancel the thread.
 		 */
 		if (!done) {
-			pthread_cancel(thread);
+			//pthread_cancel(thread);
 			usleep(100000);
 		}
 
@@ -2373,8 +2373,8 @@ private:
 	{
 		BlockingThread *self = static_cast<BlockingThread *>(arg);
 
-		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
-		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+		//pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+		//pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 
 		self->run();
 
