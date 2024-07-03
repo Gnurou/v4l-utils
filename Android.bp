@@ -1,0 +1,29 @@
+genrule {
+    name: "media-bus-format-names.h",
+    srcs: ["include/linux/media-bus-format.h"],
+    out: ["media-bus-format-names.h"],
+    tool_files: ["utils/gen_media_bus_format_names.sh"],
+    cmd: "$(location utils/gen_media_bus_format_names.sh) $(in) >$(out)",
+}
+
+cc_binary {
+    name: "v4l2-ctl",
+    generated_headers: [
+        "media-bus-format-names.h",
+    ],
+    srcs: [
+        "utils/v4l2-ctl/*.c",
+        "utils/v4l2-ctl/*.cpp",
+    ],
+    cflags: [
+        "-DNO_LIBV4L2",
+        "-include android-config.h",
+        "-Wno-missing-field-initializers",
+    ],
+    local_include_dirs: [
+        "include",
+        "include/linux",
+        "utils/common",
+    ],
+    stl: "libc++",
+}
