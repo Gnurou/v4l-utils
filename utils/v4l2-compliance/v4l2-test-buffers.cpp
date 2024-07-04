@@ -2992,6 +2992,8 @@ public:
 			sleep(1);
 		}
 
+// pthread_cancel does not exist on bionic.
+#ifndef ANDROID
 		/*
 		 * If the signal failed to interrupt the ioctl, use the heavy
 		 * artillery and cancel the thread.
@@ -3000,6 +3002,7 @@ public:
 			pthread_cancel(thread);
 			sleep(1);
 		}
+#endif
 
 		pthread_join(thread, nullptr);
 		running = false;
@@ -3012,8 +3015,11 @@ private:
 	{
 		auto self = static_cast<BlockingThread *>(arg);
 
+// pthread_cancel does not exist on bionic.
+#ifndef ANDROID
 		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, nullptr);
 		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);
+#endif
 
 		self->run();
 
